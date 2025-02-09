@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Surprise</title>
+    <style>
+        body {
+            background-color: #000; /* Latar belakang hitam */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+        }
+
+        .text-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .text {
+            font-size: 48px;
+            font-weight: bold;
+            display: flex;
+            gap: 5px;
+        }
+
+        .name-text {
+            font-size: 28px;
+            font-weight: bold;
+            display: flex;
+            gap: 5px;
+        }
+
+        .sub-text {
+            font-size: 18px; /* Ukuran font lebih kecil */
+            margin-top: 10px;
+            color: #ff007f; /* Mengubah warna teks menjadi pink */
+            word-wrap: break-word; /* Agar teks panjang tetap terlihat pada layar kecil */
+            padding: 0 10px; /* Memberikan sedikit padding kiri dan kanan */
+        }
+
+        .whatsapp-button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 20px;
+            background-color: #ff007f; /* Warna pink untuk tombol */
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 10px;
+            transition: 0.3s;
+        }
+
+        .whatsapp-button:hover {
+            background-color: #ff3385; /* Warna pink lebih terang saat hover */
+        }
+
+        /* Media query untuk tampilan mobile */
+        @media (max-width: 600px) {
+            .text {
+                font-size: 32px; /* Menyesuaikan ukuran teks untuk perangkat kecil */
+            }
+
+            .name-text {
+                font-size: 20px; /* Menyesuaikan ukuran teks nama */
+            }
+
+            .sub-text {
+                font-size: 16px; /* Ukuran font lebih kecil di perangkat mobile */
+            }
+
+            .whatsapp-button {
+                font-size: 18px; /* Menyesuaikan ukuran tombol WhatsApp */
+                padding: 8px 15px; /* Menyesuaikan padding tombol pada layar kecil */
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <audio id="birthdaySound" src="hbd_sound.mp3" autoplay loop></audio>
+
+    <div class="text-container">
+        <div class="text" id="happyText"></div>
+        <div class="text" id="birthdayText"></div>
+        <div class="name-text" id="nameText"></div>
+    </div>
+
+    <div class="sub-text">Panjang umur, sehat selalu, dimudahkan rezekinya, egonya diturunin yaa, trus ngga usah gengsi ke , jangan marah2 udaa kepala 2 masa masii marah ntar cepat tuaa hehehe</div>
+    
+    <button class="whatsapp-button" onclick="openWhatsApp()">Lanjut WA aja</button>
+
+    <script>
+        function openWhatsApp() {
+            // Nomor WhatsApp yang dituju
+            const phoneNumber = "+6289620910312";
+            // Pesan otomatis yang dikirim saat tombol ditekan
+            const message = encodeURIComponent("");
+            // Membuka WhatsApp dengan nomor tujuan dan pesan
+            window.open(`https://wa.me/${phoneNumber}?text=${message}`, "_blank");
+        }
+
+        // Animasi teks berkedip hilang-timbul huruf per huruf
+        function createBlinkingText(text, container) {
+            container.innerHTML = "";
+            text.split("").forEach((char, index) => {
+                let span = document.createElement("span");
+                span.textContent = char;
+                span.style.animation = `blink 1s infinite ${index * 0.2}s`;
+                span.style.color = "#ff007f"; // Warna pink dasar
+                span.style.fontWeight = "bold";
+                span.style.textShadow = "0 0 10px #ff33a6, 0 0 20px #ff66b2, 0 0 30px #ff99cc"; // Efek neon pink
+                container.appendChild(span);
+            });
+        }
+
+        createBlinkingText("Happy", document.getElementById("happyText"));
+        createBlinkingText("Birthday", document.getElementById("birthdayText"));
+        createBlinkingText("Wulanda Sania Putri", document.getElementById("nameText"));
+
+        // Animasi berkedip hilang-timbul dengan CSS dinamis
+        const styleSheet = document.createElement("style");
+        styleSheet.innerHTML = `
+            @keyframes blink {
+                0% { opacity: 1; text-shadow: 0 0 10px #ff33a6, 0 0 20px #ff66b2, 0 0 30px #ff99cc; }
+                50% { opacity: 0; text-shadow: none; }
+                100% { opacity: 1; text-shadow: 0 0 10px #ff33a6, 0 0 20px #ff66b2, 0 0 30px #ff99cc; }
+            }
+        `;
+        document.head.appendChild(styleSheet);
+    </script>
+
+</body>
+</html>
